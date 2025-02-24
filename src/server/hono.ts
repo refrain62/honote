@@ -18,7 +18,7 @@ const blogApp = new OpenAPIHono()
   .openapi(getBlogByIdRoute, getBlogByIdHandler)
   .openapi(createBlogRoute, createBlogHandler)
 
-app.route("/blogs", blogApp);
+const route = app.route("/blogs", blogApp);
 
 // swagger BASIC認証
 app.doc("/specification", {
@@ -31,5 +31,8 @@ app.doc("/specification", {
   });
   return auth(c, next);
 }).get("/doc", swaggerUI({ url: "/api/specification" }));
+
+// routeを型としてexportする
+export type AppType = typeof route;
 
 export default app;
