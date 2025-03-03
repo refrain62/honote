@@ -43,7 +43,17 @@ export const CreateBlogSchema = z.object({
   })
 })
 
+export const UpdateBlogSchema = z.object({
+  title: z.string().min(1, { message: "入力されていません。" }).openapi({
+    example: "honteを作った。"
+  }),
+  content: z.string().min(1, { message: "入力されていません。" }).openapi({
+    example: "まだまだhono勉強中だけど、ちょっとわかってきた。"
+  })
+})
+
 
 export type User = z.infer<typeof UserSchema>
 export type Blog = z.infer<typeof BlogSchema>
 export type CreateBlog = z.infer<typeof CreateBlogSchema>
+export type UpdateBlog = z.infer<typeof UpdateBlogSchema>
